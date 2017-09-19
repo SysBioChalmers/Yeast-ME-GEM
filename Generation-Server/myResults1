@@ -1,0 +1,36 @@
+#!/bin/bash
+# My first script
+
+#folder=pwd
+#cd $folder
+#ls $1*.lp | while read file; do echo $file;/zhome/88/9/107870/soplex-1.6.0/bin/soplex  -s0 -x  -q -C $file >$file.out;done
+#runSystem.sh 2  D16M
+echo "Objective:";grep "X15573" $1*.lp.out
+echo "Glucose"; grep "X4259"  $1*.lp.out
+echo "O2"; grep "X4612"  $1*.lp.out
+echo "ethanol"; grep "X4321"  $1*.lp.out
+echo "CO2"; grep "X4194" $1*.out
+echo "Acetate"; grep "X4146" $1*.out
+echo "NH4"; grep "X4172" $1*.out
+echo "phoshate"; grep "X4631" $1*.out
+echo "sulfate"; grep "X4681" $1*.out
+echo "Glycerol"; grep "X4367" $1*.out
+#echo "*******************************"
+#echo "*** Translation ***************"
+#echo "*******************************"
+#echo "Ribosome"; grep "X7665" $1*.out
+#echo "Intialtion_Factors_dilution"; grep "X11019"  $1*.out
+#echo "eEF1A"; grep "X10969"  $1*.out
+#echo "eEF1B"; grep "X11034"  $1*.out
+#echo "eEF2"; grep "X11034"  $1*.out
+#echo "Relase_Factors_dilution"; grep "X11016"  $1*.out
+#echo "MitoRibosome"; grep "X10286"  $1*.out
+#echo "*******************************"
+#echo "*** proteosome ***************"
+#echo "*******************************"
+#echo "proteosome"; grep "X11163"  $1*.out
+#echo "*******************************"
+#echo "*** Metabolic ***************"
+#echo "*******************************"
+#echo "PGK"; grep "X13687"  $1*.out
+
