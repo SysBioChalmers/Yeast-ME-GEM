@@ -1,9 +1,0 @@
-function m=addChaperone(m)
-m=addSSB(m);
-m=addRAC(m);
-m=addSSA(m);
-m=addHSP40(m);
-m=addSSE(m);
-m=addHSP90(m);
-m=addPFD(m);
-m=addCCT(m);
