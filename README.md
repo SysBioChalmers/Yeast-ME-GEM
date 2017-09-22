@@ -1,8 +1,7 @@
-# Name_of_Model-GEM/GEMs
+# Yeast-ME
 
-- Brief Model Description
+**We updated the metabolic model by including protein biosynthesis and degradation reactions and coupled the metabolic fluxes with protein abundances.**
 
-We updated the metabolic model by including protein biosynthesis and degradation reactions and coupled the metabolic fluxes with protein abundances.
 - Abstract:
 
 Write the abstract here, including various links
