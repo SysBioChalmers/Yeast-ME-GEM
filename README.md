@@ -4,7 +4,7 @@
 
 - Abstract:
 
-Write the abstract here, including various links
+Flux Balance Analysis diverts the glucose uptake rate into many pathways to illustrate how a cell builds its biomass. FBA does not consider the enzymatic cost in each pathway, so all predicted flux distributions are only in respiration state. In this computational framework (Yeast-ME), we estimated the cost of protein biosynthesis and degradation. We included also in silico ribosome and proteasome. Finally, for each peptide added three reactions for translation, degradation, and dilutions. Using the new reactions, the model was to estimate a protein abundance, and the metabolic fluxes were coupled with the protein abundances. By constrained protein abundance per cell and other 22 constraints, the model becomes able to predict the metabolic shifts. 
 
 - Model KeyWords:
 
