@@ -2,8 +2,7 @@
 
 - Brief Model Description
 
-Shortly desccribe the model
-
+We updated the metabolic model by including protein biosynthesis and degradation reactions and coupled the metabolic fluxes with protein abundances.
 - Abstract:
 
 Write the abstract here, including various links
