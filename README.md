@@ -6,24 +6,9 @@
 
 Flux Balance Analysis diverts the glucose uptake rate into many pathways to illustrate how a cell builds its biomass. FBA does not consider the enzymatic cost in each pathway, so all predicted flux distributions are only in respiration state. In this computational framework (Yeast-ME), we estimated the cost of protein biosynthesis and degradation. We included also in silico ribosome and proteasome. Finally, for each peptide added three reactions for translation, degradation, and dilutions. Using the new reactions, the model was to estimate a protein abundance, and the metabolic fluxes were coupled with the protein abundances. By constrained protein abundance per cell and other 22 constraints, the model becomes able to predict the metabolic shifts. 
 
-- Model KeyWords:
+- Model KeyWords:Yeast metabolic models, genome-scale metabolic models, metabolic shiftm metabolism overflow.
 
 **GEM Category:** Species/Community/Collection; **Utilisation:** maximising product growth, minimising product growth, predictive simulation, experimental data reconstruction; **Field:** metabolic engineering, bacterial community, thermodynamic modeling, metabolic-network reconstruction; **Type of Model:** Init, curated, reconstruction, dynamic-kinetic simulation; **Model Source:** HPA, HMR, iHepatocytes2322, YeastMetabolicNetwork, [kbase](https://kbase.us/); **Omic Source:** Transcriptomics, Proteomics, Metabolomics; **Enzymatically Constrained** ; **Taxonomy:** Homo sapiens, Saccharomyces cerevisiae, Bacteria; **Metabolic System:** Mitochondrial metabolism, Fatty Acid Metabolism, Glucose Metabolism, General Metabolism; **Tissue:** NameOfTissue; **Bioreactor** ; **Cell Type:** CellType; **Cell Line:** Cancer_NumberOfLine; **Strain:** str.xxxx; **Condition:** Cancer, Malnourishment, Starvation, Oxidative Stress, Rich Media;
-
-- Reference:  _Author.1, Author.2, "Title of the paper", Journal, Journal Volume, Article Number, Pages, (year), doi_
-
-- Pubmed ID: 12345678
-
-- Last update: 201-XX-XX
-
-- The model:
-
-|Taxonomy | Template Model | Reactions | Metabolites| Genes |Cell Type|Cell Line |
-| ------------- |:-------------:|:-------------:|:-------------:|-----:|-----:|-----:|
-|Name model strxxxx |	Name of your template model| xxxx|	xxxx|	xxxx|xxxx|xxxx|xxxx|
-
-
-This repository is administered by name @Githubname, Division of Systems and Synthetic Biology, Department of Biology and Biological Engineering, Chalmers University of Technology
 
 
 
