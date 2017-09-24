@@ -22,7 +22,7 @@ Genome-scale metabolic models (GEMs) elucidate how a cell consumes nutrients to 
   * The [RAVEN](https://github.com/SysBioChalmers/RAVEN) toolbox for MATLAB. An up-to-date version from COBRA GitHub repository is strongly recommended . Add the directory to your Matlab path, instructions [here](https://se.mathworks.com/help/matlab/ref/addpath.html?requestedDomain=www.mathworks.com)
 
 ### Dependencies - Recommended Software:
-* libSBML MATLAB API (version [5.13.0](https://sourceforge.net/projects/sbml/files/libsbml/5.13.0/stable/MATLAB%20interface/)  is recommended).
+* SoPlex (http://soplex.zib.de/).
 
 
 ### Installation Instructions
@@ -31,8 +31,7 @@ Genome-scale metabolic models (GEMs) elucidate how a cell consumes nutrients to 
 
 
 ## Contributors
-- [Contributor1](https://www.chalmers.se/en/Staff/Pages/.aspx), Chalmers University of Technology, Gothenburg Sweden
-- [Contributor2](https://www.chalmers.se/en/staff/Pages/.aspx), Chalmers University of Technology, Gothenburg Sweden
+- Ibrahim Elsemman (https://www.chalmers.se/en/Staff/), Technical University of Denmark, Kgs.Lyngby, Denamrk
 
 ## License
 The MIT License (MIT)
