@@ -8,7 +8,7 @@ Genome-scale metabolic models (GEMs) elucidate how a cell consumes nutrients to 
 
 - Model KeyWords:Yeast metabolic models, genome-scale metabolic models, metabolic shift, metabolism overflow.
 
-**GEM Category:** Species/Community/Collection; **Utilisation:** maximising product growth, minimising product growth, predictive simulation, experimental data reconstruction; **Field:** metabolic engineering, bacterial community, thermodynamic modeling, metabolic-network reconstruction; **Type of Model:** Init, curated, reconstruction, dynamic-kinetic simulation; **Model Source:** HPA, HMR, iHepatocytes2322, YeastMetabolicNetwork, [kbase](https://kbase.us/); **Omic Source:** Transcriptomics, Proteomics, Metabolomics; **Enzymatically Constrained** ; **Taxonomy:** Homo sapiens, Saccharomyces cerevisiae, Bacteria; **Metabolic System:** Mitochondrial metabolism, Fatty Acid Metabolism, Glucose Metabolism, General Metabolism; **Tissue:** NameOfTissue; **Bioreactor** ; **Cell Type:** CellType; **Cell Line:** Cancer_NumberOfLine; **Strain:** str.xxxx; **Condition:** Cancer, Malnourishment, Starvation, Oxidative Stress, Rich Media;
+**GEM Category:** Species; **Utilisation:** maximising product growth, minimising product growth, predictive simulation, experimental data reconstruction; **Field:** metabolic engineering, thermodynamic modeling, metabolic-network reconstruction; **Type of Model:** Init, curated, reconstruction, dynamic-kinetic simulation; **Model Source:** HPA, HMR, iHepatocytes2322, YeastMetabolicNetwork; **Omic Source:** Transcriptomics, Proteomics, Metabolomics; **Enzymatically Constrained** ; **Taxonomy:** Saccharomyces cerevisiae; **Metabolic System:** Mitochondrial metabolism, Fatty Acid Metabolism, Glucose Metabolism, General Metabolism; **Strain:** str.xxxx; **Condition:** Glucose-limit, Rich Media;
 
 
 
@@ -31,7 +31,7 @@ Genome-scale metabolic models (GEMs) elucidate how a cell consumes nutrients to 
 
 
 ## Contributors
-- Ibrahim Elsemman (https://www.chalmers.se/en/Staff/), Technical University of Denmark, Kgs.Lyngby, Denamrk
+- Ibrahim Elsemman (http://sysbio.se/people.html), Technical University of Denmark, Kgs.Lyngby, Denamrk
 
 ## License
 The MIT License (MIT)
