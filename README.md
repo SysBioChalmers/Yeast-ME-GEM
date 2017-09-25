@@ -8,7 +8,16 @@ Genome-scale metabolic models (GEMs) elucidate how a cell consumes nutrients to 
 
 - Model KeyWords:Yeast metabolic models, genome-scale metabolic models, metabolic shift, metabolism overflow.
 
-**GEM Category:** Species; **Utilisation:** maximising product growth, minimising product growth, predictive simulation, experimental data reconstruction; **Field:** metabolic engineering, thermodynamic modeling, metabolic-network reconstruction; **Type of Model:** Init, curated, reconstruction, dynamic-kinetic simulation; **Model Source:** HPA, HMR, iHepatocytes2322, YeastMetabolicNetwork; **Omic Source:** Transcriptomics, Proteomics, Metabolomics; **Enzymatically Constrained** ; **Taxonomy:** Saccharomyces cerevisiae; **Metabolic System:** Mitochondrial metabolism, Fatty Acid Metabolism, Glucose Metabolism, General Metabolism; **Strain:** str.xxxx; **Condition:** Glucose-limit, Rich Media;
+**GEM Category:** Species; 
+**Utilisation:** maximising product growth, minimising product growth, predictive simulation, experimental data reconstruction; **Field:** metabolic engineering, thermodynamic modeling, metabolic-network reconstruction;
+**Type of Model:** Init, curated, reconstruction, dynamic-kinetic simulation;
+**Model Source:** YeastMetabolicNetwork; 
+**Omic Source:** Transcriptomics, Proteomics, Metabolomics; 
+**Enzymatically Constrained** ; 
+**Taxonomy:** Saccharomyces cerevisiae; 
+**Metabolic System:** Mitochondrial metabolism, Fatty Acid Metabolism, Glucose Metabolism, General Metabolism; 
+**Strain:** str.xxxx;
+**Condition:** Glucose-limit, Rich Media;
 
 
 
