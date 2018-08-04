@@ -1,4 +1,4 @@
-function [sol model complexFileName]=modelGenerationGeko(MyModel,media,mu1,atpCost,objective,glucoseUptake,T,copies, overExpressed, fileName,complex_list,compartment)
+function [sol model complexFileName molecule_number]=modelGenerationGECKO(MyModel,media,mu1,atpCost,objective,glucoseUptake,T,copies, overExpressed, fileName,complex_list,compartment,SoplexVersion,Iteration,active_translation)
 
 [a b Proteins_MW]=xlsread('TableS1.xlsx','MW');
 [a b Proteins_length]=xlsread('TableS1.xlsx','Length');
@@ -11,9 +11,18 @@ function [sol model complexFileName]=modelGenerationGeko(MyModel,media,mu1,atpCo
 
 k=0;
 key=strrep(fileName,'.lp','');
-command =sprintf('/zhome/88/9/107870/soplex-1.6.0/bin/soplex  -s0 -x  -q -C %s > %s.out %s',fileName,fileName);
-
-
+%
+%SoplexPath='/zhome/88/9/107870/solpex-solvers/soplex-3.0.1'
+%SoplexPath='/zhome/88/9/107870/solpex-solvers/soplex-3.0.1/bin/soplex -i2147483647 -f0 -o0 --writebas=mybase.bas -c  -x --int:checkmode=2 -i2147483647 -q --solvemode=2 --readmode=1 --int:syncmode=1';
+SoplexPath='/zhome/88/9/107870/soplex-2.2.0/bin/soplex -f1e-20  -o1e-20 --int:syncmode=1 --solvemode=2 --readmode=1 -x -q -c'; 
+%Soplex 1.6
+if strcmp(SoplexVersion,'Soplex-1.6')==1
+  command =sprintf('/zhome/88/9/107870/soplex-solvers/soplex-1.6.0/bin/soplex  -s0 -x  -q -C %s > %s.out %s',fileName,fileName);
+end
+%soplex 3.0.1
+if strcmp(SoplexVersion,'Soplex-3.0')==1
+  command =sprintf('%s %s > %s.out %s',SoplexPath,fileName,fileName);
+end
 
 % Tm=42;% 
 % Tf=0;
@@ -36,6 +45,7 @@ else
     UnFoldRatio=0.0;
 end
 
+
 Dt=1/(273.15 + T) - 1/(273.15 + Topt);
 
 Df=exp(-3200*Dt);
@@ -45,26 +55,32 @@ sigmaTemp=Df;
 %% Parameter setting
 mu=mu1; 
 sigma_plasma = 1;
-c_mim=300;
+c_mim=65;
 
-average_amino_acids=110;
-average_protein_length=350;
+average_amino_acids=128;
+average_protein_length=300;
 
 molecule_number=floor(proteinRatio(mu)*13/(average_protein_length*average_amino_acids)*6.023e23/1e12); 
-mitochondrionVolume=1;%0.88; %Ratio of mitochondrion to cell volume is equal 1-2%
+molecule_number_mu_max=200;%floor(proteinRatio(0.46)*13/(average_protein_length*average_amino_acids)*6.023e23/1e12); 
+
+mitochondrionVolume=0.8;%Ratio of mitochondrion to cell volume is equal 1-2%
 cyto_volume =4;
-plasma_area=40;
-plasma_budjet=40;
+plasma_area=50;
+plasma_budjet=10;
 Vmax_NH4 = 7;
 
 sigma=1;%3.7*mu;% + 0.1475;%the line is fitted from fermentation data
-upr=0.15;
+upr=-1.6667*mu + 0.76;
+upr=0.28;
 
+    
 if sigma>1
     sigma=1;
 end
 
-
+% if mu>=0.30
+%     upr=0.30;
+% end
 %the sector partition
 Metabolic_Sector=0*proteinRatio(mu);
 Ribosome_Sector=0*proteinRatio(mu);
@@ -72,8 +88,8 @@ Engergy_Sector=0*Metabolic_Sector;
 Maintaince_Sector=upr*proteinRatio(mu);
 min_kcat=1;
 kdeg=0.045;
-kcat = 50*60*60;
-kcat_for_missing=90;
+kcat = 90*60*60;
+kcat_for_missing=80;
 % if T<=To
 %     kcat=kcat*TL;
 % else
@@ -97,8 +113,8 @@ f=56517.2/1000.0;
 m_rr=1.9e6;
 m_aa=average_amino_acids;
 f_rRNA=0.85;
-kt=(1/0.38);
-r0=0.19;
+kt=(1/0.21);
+r0=0.14;
 ribosome_active_ratio=1;
 c_ribosome= m_rr/(m_aa * f_rRNA);
 
@@ -115,22 +131,23 @@ c_ribo_dil = mu / (kdeg_ribo + mu);
 c_ribo_constant =1347851.15/(1000* (kdeg_ribo + mu));
 
 %translation factors
-kcat_ribo_scanning = 10*60*60*sigmaTemp;
-kcat_ribo_eEF1A =6*60*60*sigmaTemp;
-kcat_ribo_eEF1B =6*60*60*sigmaTemp;
-kcat_ribo_eEF2 =10*60*60*sigmaTemp;
-kcat_ribo_eEF3 =940*60*sigmaTemp;
-kcat_ribo_eRF=0.17*60*60*sigmaTemp;
+sTF=0.8;
+kcat_ribo_scanning = sTF*kcat_ribo*60*60*sigmaTemp;
+kcat_ribo_eEF1A =sTF*6*60*60*sigmaTemp;
+kcat_ribo_eEF1B =sTF*6*60*60*sigmaTemp;
+kcat_ribo_eEF2 =sTF*kcat_ribo*60*60*sigmaTemp;
+kcat_ribo_eEF3 =sTF*970*kcat_ribo*60*sigmaTemp;
+kcat_ribo_eRF=sTF*0.17*60*60*sigmaTemp;
 
-Mito_ribosome_active_ratio=1;
-kcat_ribo_mito=kcat_ribo;%(1/5)*15*60*60;
+Mito_ribosome_active_ratio=active_translation;
+kcat_ribo_mito= (1/10)*20*60*60;
 kdeg_ribo_mito= kdeg;
 c_ribo_mito = kcat_ribo_mito / (kdeg_ribo_mito + mu);
 c_ribo_deg_mito = kdeg_ribo_mito / (kdeg_ribo_mito + mu);
 c_ribo_dil_mito = mu / (kdeg_ribo_mito + mu);
 
 %Assembly Factors
-kcat_assembly=(1/2)*2000*60*sigmaTemp;
+kcat_assembly=(1/4)*2000*60*sigmaTemp;
 kdeg_asembly= kdeg;
 c_assembly = kcat_assembly / (kdeg_asembly + mu);
 c_assembly_deg = kdeg_asembly / (kdeg_asembly + mu);
@@ -154,8 +171,6 @@ model= fixReaction(model);
 
 model = Inactivate_Glucose(model);
 
-model.c=zeros(numel(model.c),1);
-
 %% Biomass Reaction
 eq=biomass_CEN_PK(mu);
 %fprintf('%s/n',eq);
@@ -168,7 +183,9 @@ rxnID='test_biomass';
 rxnNames=sprintf('test biomass');
 model=addYeastReaction(model,eq,{rxnID},{rxnNames},mu,mu,0,{''});
 %set biomass
-model.c=zeros(numel(model.c),1);
+if strcmp(objective,'min_carbon')==0
+    model.c=zeros(numel(model.c),1);
+end
 model.c(find(ismember(model.rxns,'Ribosome_biosynthesis')))=0;
 
 %%
@@ -182,6 +199,7 @@ model.c(find(ismember(model.rxns,'Ribosome_biosynthesis')))=0;
 
 
 %%  growth Media
+
 model=Glucose_Growth(model,glucoseUptake,0);
 
 if strcmp(media,'YPD')==1
@@ -194,7 +212,7 @@ else
     %the growth media is minimum
 end
 %control NH4 uptake rate
-model = closeAmmoniumOnly(model,Vmax_NH4,0);
+%model = closeAmmoniumOnly(model,Vmax_NH4,0);
 %model = closeO2(model);
 %model = Ethanol_Growth(model,1000,-1);
 %model = Glycerol_Growth(model,1000,-1);
@@ -220,6 +238,9 @@ if strcmp(objective,'min_glucose')==1
 elseif strcmp(objective,'max_unmodelled_protein')==1
     index_obj=find(ismember(model.rxns,'Unmodeled_Protein_biosynthesis'));
     fprintf(fptr,'obj: X%d\n',index_obj);
+elseif strcmp(objective,'min_carbon')==1
+    index_obj=find(model.c==-1);
+    fprintf(fptr,'obj: -X%d\n',index_obj);
 else
     fprintf(fptr,'obj: 0.000\n');
 end
@@ -269,24 +290,35 @@ Engery_content='';
 % Expression=Estimate_abundance(complex_list,fileName_abundance,sheet_abundance);
 Expression_syn=zeros(numel(complex_list),1);
 fileExpression=sprintf('S_%.2g.xlsx',0.1) % replace 0.1 with mu
- [a b S_factor]=xlsread(fileExpression);
+%  if(sprintf('%s.out.sfactor',fileName),'file')==2
+%  else
+     
+ if (Iteration==1)
+     S_factor=ones(6000,1);
+ else
+    [a b c express_data express_model S_factor]=textread(strrep(sprintf('%s.out.sfactor',fileName),sprintf('k_%d',Iteration),sprintf('k_%d',Iteration-1)),'%s%s%s%f%f%f');
+
+ end
  % print S factor for each complex
  complexFileName = strrep(fileExpression,'.xlsx','.complexName.txt');
  fptr_sfactor=fopen( complexFileName,'w');
  
 ks=1;
+
 for i=1:numel(complex_list) %check again for 1:n
     
-    if (ks<=6000)% strcmp(compartment(i),'mitochondrion')==0
-        
+    if (ks<=80000)% strcmp(compartment(i),'mitochondrion')==0
+%          if (Iteration==2 && ks==300)
+%               S_factor(:)=1;
+%          end        
         peptide=regexp(complex_list{i},':','split');
         
         if numel(find(ismember(mitoProteins,peptide)))==0
             
             if strcmp(complex_list{i},'')==0 && report_reaction(i)==0
                 fprintf(fptr_sfactor,'S%d\t%s\t%s\n',ks,complex_list{i},strrep(compartment{i},' ','_'));
-                if ks<=numel(S_factor(:,3))
-                    SS= cell2mat(S_factor(ks,3));
+                if ks<=numel(S_factor(:))
+                    SS= S_factor(ks);
                     if SS==0
                         SS=sigma;
                     end
@@ -294,9 +326,15 @@ for i=1:numel(complex_list) %check again for 1:n
                     SS=sigma;
                     
                 end
-
-               SS=1;         
-               ks=ks+1;
+              if SS<=0.01
+                  SS=0.01;
+              end
+              if SS>=1
+              %    SS=1;
+              end
+              % SS=1;
+              %scape this 
+                ks=ks+1;
                 %compute the molecular weight for the complex
                 MW=0;
                 
@@ -370,7 +408,26 @@ for i=1:numel(complex_list) %check again for 1:n
                     end
               end
                 %print kcat condition
-                fprintf(fptr,'CM%d: %s - %.15f X%d <= 0\n',k1,rxns,SS*weight_sigma,s); %K for average kcat or KK for different kcats, KK1 for GEKO
+                %print kcat condition
+                glcouse_transporter_genes={'YDL245C' 'YDL247W' 'YDR342C' 'YDR343C' 'YDR345C' 'YDR536W' 'YEL069C' 'YFL011W' 'YHR092C' 'YHR094C' 'YHR096C' 'YJL214W' 'YJL219W' 'YJR158W' 'YJR160C' 'YLR081W' 'YMR011W' 'YNR072W' 'YOL156W'};
+                saturation_transporter=1;
+                if numel(find(ismember(complex_list(i),Protein_plasma(:,1))))>=1
+                    
+                   if numel(find(ismember(glcouse_transporter_genes, cell2mat(complex_list(i)))))>0
+                       if mu<=0.27
+                        saturation_transporter=1;%0.28*mu + 0.1355;%0.75/sigma;
+                       else
+                        saturation_transporter=1;% 2.3027*mu - 0.4047;%0.75/sigma;
+                       end
+
+                           
+                   end
+                    
+                   
+                    
+                end
+                
+               fprintf(fptr,'CM%d: %s - %.15f X%d <= 0\n',k1,rxns,saturation_transporter*SS*weight_sigma,s); %K for average kcat or KK for different kcats, KK1 for GEKO
                    
                 
                 if mod(i,300)==0
@@ -406,7 +463,28 @@ for i=1:numel(complex_list) %check again for 1:n
                 
             end
         else % mito 
-            
+            fprintf(fptr_sfactor,'S%d\t%s\t%s\n',ks,complex_list{i},strrep(compartment{i},' ','_'));
+            if ks<=numel(S_factor(:))
+                    SS= S_factor(ks);
+                    if SS==0
+                        SS=sigma;
+                    end
+                else
+                    SS=sigma;
+                    
+                end
+
+               %SS=1;    
+               if SS<=0.01
+                   SS=0.01;
+               end
+              if SS>=1
+                 % SS=1;
+              end
+              
+              
+               ks=ks+1;
+               
             I=find(ismember(subunit(:,1),complex_list{i}));
             ns=ones(numel(peptide),1);
             if numel(I)==1
@@ -473,6 +551,27 @@ end
 
 %close fptr_sfactor
 fclose(fptr_sfactor);
+%%
+%tRNA loading
+%
+
+for i=1:numel(model.rxns)
+    name=regexp(cell2mat(model.rxns(i)),'_loading');
+    if numel(name)>=1
+         c=cell2mat(strrep(MyModel.grRules(i),':','_'));
+         rxnID=sprintf('%s_complex_formation_cytoplasm',c);
+         rxnID=strrep(rxnID,'-','');
+         s=find(ismember(model.rxns,rxnID));
+         
+         rxnID=sprintf('%s_complex_degradation_cytoplasm',c);
+         rxnID=strrep(rxnID,'-','');
+         
+         d=find(ismember(model.rxns,rxnID));
+         
+         
+         
+    end
+end
 
 
 %% Ribosome capacity constrain
@@ -532,7 +631,7 @@ for i=1:numel(model.rxns)
             error(sprintf('Length of gene%d: %s is zero',r,cell2mat(gene)));
         end
         %print the translation constraint
-        fprintf(fptr,'CTranslation%d: X%d - %.15f R%d =0\n',r,i,kcat_ribo/L,r);
+        fprintf(fptr,'CTranslation%d: X%d - %.15f R%d =0\n',r,i,kcat_ribo/(L+L_scanning + 4),r);
         fprintf(fptr,'CTranslationScanning%d: X%d - %.15f IF%d =0\n',r,i,kcat_ribo_scanning/L_scanning,r);
         
         % elongation
@@ -706,7 +805,7 @@ fprintf(fptr,'CMR%d: X%d - %.15f X%d = 0\n',3,syn_dil,c_ribo_dil_mito,syn_ribo )
 %protein content constrains
 fprintf(fptr,'CtotalProtein: %s = %f\n',ve_total,proteinRatio(mu)/(1-UnFoldRatio*(1-RefoldingRatio)));
 total_number=molecule_number/(13*6.023e8)*(mu+kdeg);
-fprintf(fptr,'CveTotal: %s = %.15f\n',ve_total_molecules, total_number);
+fprintf(fptr,'CveTotal: %s <= %.15f\n',ve_total_molecules, total_number);
 
 %%
 
@@ -729,7 +828,7 @@ fprintf(fptr,'CveTotal: %s = %.15f\n',ve_total_molecules, total_number);
 %% Chaperone constraint
 %Chaperone constrain
 %misFoldingConstraint(MyModel,fptr,UnFoldRatio);
-%misFoldingConstraintHsp1044(model,fptr,UnFoldRatio,mu,5,kdeg,sigmaTemp,RefoldingRatio);
+%%misFoldingYFPHsp10444(model,fptr,UnFoldRatio,mu,5,kdeg,sigmaTemp,RefoldingRatio);
 
 % SSB
 kcat = (1/1.5)*60*sigmaTemp;
@@ -816,9 +915,9 @@ fprintf(fptr,'CMIM: %s <= %f\n',membraneCondition(model, mu,kdeg),c_mim);
 fprintf(fptr,'PMR:   %s <= %f\n',plasmaCondition(model, mu,kdeg),plasma_area);
 %fprintf(fptr,'PMR1   %s <= %f\n', outMembraneConstraints(),plasma_budjet);
 %NH4 Vmax
-fprintf(fptr,'PMR2: X4172 <= %f\n',Vmax_NH4);
-fprintf(fptr,'PMR3: X4631 <= 15\n');
-fprintf(fptr,'PMR2: X4681 <= 15\n');
+% fprintf(fptr,'PMR2: X4172 <= %f\n',Vmax_NH4);
+% fprintf(fptr,'PMR3: X4631 <= 15\n');
+% fprintf(fptr,'PMR2: X4681 <= 15\n');
 
 fprintf(fptr,'MitochondrionVolume: %s <= %f\n',mitoVolumeCondition(model, mu,kdeg),mitochondrionVolume);
 
@@ -978,6 +1077,7 @@ for i=1:numel(model.rxns)
 end
 fprintf(fptr,'End\n');
 fclose(fptr);
+pause(10);
 %
 
 
@@ -989,4 +1089,11 @@ system(command,'-echo');
 %save('MyModelNew.mat', 'model');
 
 fileNameOutput=sprintf('%s.out',fileName);
-sol=readSoplex_results(fileNameOutput,model);
+
+if strcmp(SoplexVersion,'Soplex-1.6')==1
+   sol=readSoplex_results(fileNameOutput,model);
+end
+%soplex 3.0
+if strcmp(SoplexVersion,'Soplex-3.0')==1
+  sol=readSoplex3_results(fileNameOutput,model);
+end

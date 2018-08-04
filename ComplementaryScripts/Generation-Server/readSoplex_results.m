@@ -4,7 +4,7 @@ fptr=fopen(fileName,'r');
 line = fgets(fptr);
 k=1;
 obj='NO objeective';
-X=zeros(numel(model.rxns)+1,1);%number of variables in LP
+X=zeros(numel(model.rxns)+5,1);%number of variables in LP %+1
 while ischar(line)
     if k==133
         y=0;

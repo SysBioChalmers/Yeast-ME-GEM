@@ -1,0 +1,79 @@
+function nullModel = EFMnumber(model,fileName)
+% how many are EFMs in a LP solution
+
+% 1- read Soplex solution 
+
+
+sol=readSoplex3_results(fileName,model);
+metabolic_flux=sol.X;
+Flux_index = find(metabolic_flux > 1.0e-15);
+metabolic_Flux=Flux_index(Flux_index<=5738);
+
+% please note -2 for removing maintaince and GAM reactions
+metabolic_Flux=union(metabolic_Flux,17707:numel(model.rxns)-2);
+
+reactions=model.rxns(metabolic_Flux);
+S=model.S(:,metabolic_Flux);
+mets=union(1:2220,11729);
+S=S(mets,:);
+
+newModel.rxns=model.rxns(metabolic_Flux);
+newModel.rxnNames=model.rxnNames(metabolic_Flux)
+newModel.mets=model.mets(mets);
+newModel.metNames=model.metNames(mets);
+newModel.S=S;
+newModel.metComps=model.metComps(mets);
+
+nullModel=initModel_yeast;
+for i=1:numel(newModel.rxns)
+    p_i=find(newModel.S(:,i)>0);
+    product='';
+    for j=1:numel(p_i)
+        if strcmp(product,'')==1
+            if newModel.S(p_i(j),i)==1
+            product=sprintf('%s[%s]', cell2mat(newModel.metNames(p_i(j))),cell2mat(newModel.metComps(p_i(j))));
+            else
+                            product=sprintf('%f %s[%s]', full(newModel.S(p_i(j),i)) ,cell2mat(newModel.metNames(p_i(j))),cell2mat(newModel.metComps(p_i(j))));
+            end
+
+        else
+            if newModel.S(p_i(j),i)==1
+               product=sprintf('%s + %s[%s]', product, cell2mat(newModel.metNames(p_i(j))),cell2mat(newModel.metComps(p_i(j))));
+            else
+               product=sprintf('%s + %f %s[%s]', product, full(newModel.S(p_i(j),i)), cell2mat(newModel.metNames(p_i(j))),cell2mat(newModel.metComps(p_i(j))));
+           end
+            
+        end
+    end
+    
+     s_i=find(newModel.S(:,i)<0);
+    substrate='';
+    for j=1:numel(s_i)
+        if strcmp(substrate,'')==1
+            if newModel.S(s_i(j),i)==-1
+            substrate=sprintf('%s[%s]', cell2mat(newModel.metNames(s_i(j))),cell2mat(newModel.metComps(s_i(j))));
+            else
+              substrate=sprintf('%f %s[%s]', - full(newModel.S(s_i(j),i)), cell2mat(newModel.metNames(s_i(j))),cell2mat(newModel.metComps(s_i(j))));
+
+            end
+        else
+            if newModel.S(s_i(j),i)==-1
+            substrate=sprintf('%s + %s[%s]', substrate, cell2mat(newModel.metNames(s_i(j))),cell2mat(newModel.metComps(s_i(j))));
+            else
+            substrate=sprintf('%s + %f %s[%s]', substrate, -full(newModel.S(s_i(j),i)), cell2mat(newModel.metNames(s_i(j))),cell2mat(newModel.metComps(s_i(j))));
+                
+            end
+            
+        end
+    end
+    
+    eq=sprintf('%s => %s',substrate,product);
+    fprintf('%s\n',eq);
+    
+     nullModel=addYeastReaction(nullModel,eq,newModel.rxns(i),newModel.rxnNames(i),0,1000,0,{''});
+end
+
+rr=rank(full(S));
+size(rr);
+n=null(full(S));
+size(n)

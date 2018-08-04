@@ -1,0 +1,5 @@
+SoPlex version 2.2.0 [mode: optimized] [precision: 16 byte] [rational: GMP 6.1.2] [githash: c9658ca]
+Copyright (c) 1996-2015 Konrad-Zuse-Zentrum fuer Informationstechnik Berlin (ZIB)
+
+real:feastol = 1e-20
+

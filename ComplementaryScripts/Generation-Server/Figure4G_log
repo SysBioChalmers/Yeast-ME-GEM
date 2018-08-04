@@ -1,0 +1,68 @@
+[Warning: Name is nonexistent or not a directory:
+/zhome/88/9/107870/Documents/MATLAB/zhome/88/9/107870/efmtool] 
+[Warning: Name is nonexistent or not a directory:
+/zhome/88/9/107870/efmtool/config] 
+[Warning: Name is nonexistent or not a directory: /zhome/88/9/107870/efmtool/lib] 
+[Warning: Name is nonexistent or not a directory: /zhome/88/9/107870/efmtool/tmp] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/simulink/simulink/core_templates] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/rtw/rtw/misra] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/target/extensions/processor/tic5000] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/target/extensions/processor/tic5000/blks] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/target/extensions/processor/tic5000/blks/mex] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/target/extensions/processor/tic5000/blks/masks] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/realtime/realtime/hwconnection] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/slvnv/metrics] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/slvnv/do178b] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/slvnv/styleguide] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/target/targetdemos] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/matlab/external/engines/python] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/physmod/equation_language/equation_language] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/simulink/sledittimecheck] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/econ/econdemos] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/dsp/dspdeployabledemos] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/matlab/hds] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/matlab/uicomponents/uicomponents/pending] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/map/mapdemos] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/distcomp/mapreduce] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/slvnv/iec61508] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/target/extensions/processor/tic5000/tic5000demos] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/target/extensions/processor/tic6000] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/target/extensions/processor/tic6000/rtw] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/target/extensions/processor/tic6000/tfl] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/target/extensions/processor/tic6000/utils] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/target/extensions/processor/tic6000/blks/sysobj_mex] 
+[Warning: Name is nonexistent or not a directory:
+/appl/matlab/920/toolbox/target/extensions/processor/tic6000/blks/mex] 
+{Error: <a href="matlab: opentoline('/appl/matlab/920/toolbox/matlab/iofun/xlsread.m',113,8)">File: xlsread.m Line: 113 Column: 8
+</a>Arguments to IMPORT must either end with ".*" or else specify a fully qualified class name: "matlab.io.internal.utility.convertStringsToChars" fails this test.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Figure4G', '/zhome/88/9/107870/Yeast-ME-GEM/ComplementaryScripts/Generation-Server/Figure4G.m', 11)" style="font-weight:bold">Figure4G</a> (<a href="matlab: opentoline('/zhome/88/9/107870/Yeast-ME-GEM/ComplementaryScripts/Generation-Server/Figure4G.m',11,0)">line 11</a>)
+[ carbone b c]=xlsread('other_carbon.xlsx','Data_minimum');
+} 

@@ -56,56 +56,27 @@ model.lb(find(ismember(model.rxns,'r_1631_forward')))=0;
 model.ub(find(ismember(model.rxns,'r_1862_forward')))=0;
 model.lb(find(ismember(model.rxns,'r_1862_forward')))=0;
 
-%acetate
-%model.ub(find(ismember(model.rxns,'r_0216_reverse')))=0;
-%model.lb(find(ismember(model.rxns,'r_0216_reverse')))=0;
+%Block L-alanine transporter
+model.ub(find(ismember(model.rxns,'r_1873_forward')))=0;
+model.lb(find(ismember(model.rxns,'r_1873_forward')))=0;
+
+%block glycerol
+%Block GCY1 
+model.ub(find(ismember(model.rxns,'r_0487_forward')))=0;
+model.lb(find(ismember(model.rxns,'r_0487_forward')))=0;
+
+model.ub(find(ismember(model.rxns,'r_0472_forward')))=0;
+model.lb(find(ismember(model.rxns,'r_0472_forward')))=0;
+
+
+model.ub(find(ismember(model.rxns,'r_0713_reverse')))=0;
+model.lb(find(ismember(model.rxns,'r_0713_reverse')))=0;
+
+
+model.ub(find(ismember(model.rxns,'r_0714_reverse')))=0;
+model.lb(find(ismember(model.rxns,'r_0714_reverse')))=0;
 
 
 
 
 
-% %NADH regenerate
-model.ub(find(ismember(model.rxns,'r_0182_forward')))=0;
-model.lb(find(ismember(model.rxns,'r_0182_forward')))=0;
-
-model.ub(find(ismember(model.rxns,'r_0183_forward')))=0;
-model.lb(find(ismember(model.rxns,'r_0183_forward')))=0;
-
-model.ub(find(ismember(model.rxns,'r_1870_forward')))=0;
-model.lb(find(ismember(model.rxns,'r_1870_forward')))=0;
-% 
- model.ub(find(ismember(model.rxns,'r_1087_forward')))=0;
- model.lb(find(ismember(model.rxns,'r_1087_forward')))=0;
-%
-
-model.ub(find(ismember(model.rxns,'r_1989_forward')))=0;
-model.lb(find(ismember(model.rxns,'r_1989_forward')))=0;
-
-model.ub(find(ismember(model.rxns,'r_1815_forward')))=0;
-model.lb(find(ismember(model.rxns,'r_1815_forward')))=0;
-
-model.ub(find(ismember(model.rxns,'r_1686_reverse')))=0;
-model.lb(find(ismember(model.rxns,'r_1686_reverse')))=0;
-
-
-
-
-% 
-% %adjust TCA in high growth rate
-% 
-% model.ub(find(ismember(model.rxns,'r_0002_forward')))=0;
-% model.lb(find(ismember(model.rxns,'r_0002_forward')))=0;
-% 
-% model.ub(find(ismember(model.rxns,'r_0001_forward')))=0;
-% model.lb(find(ismember(model.rxns,'r_0001_forward')))=0;
-% 
-% model.ub(find(ismember(model.rxns,'r_0004_forward')))=0;
-% model.lb(find(ismember(model.rxns,'r_0004_forward')))=0;
-% 
-% % FMN-dependent NAD(P)H
-% %suc
-% model.ub(find(ismember(model.rxns,'r_2056_forward')))=0;
-% model.lb(find(ismember(model.rxns,'r_2056_forward')))=0;
-% 
-% %glu import
-% 

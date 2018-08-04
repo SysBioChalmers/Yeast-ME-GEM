@@ -15,10 +15,16 @@ echo "NH4"; grep "X4172" $1*.out
 echo "phoshate"; grep "X4631" $1*.out
 echo "sulfate"; grep "X4681" $1*.out
 echo "Glycerol"; grep "X4367" $1*.out
+#echo "Cytosolic NADH"; grep "X928" $1*.out
+#echo "Cytosolic MDH2"; grep "X849" $1*.out
+
+
+
 #echo "*******************************"
 #echo "*** Translation ***************"
 #echo "*******************************"
-#echo "Ribosome"; grep "X7665" $1*.out
+echo "Ribosome"; grep "X8079" $1*.out
+echo "NDI1"; grep "X18085" $1*.out
 #echo "Intialtion_Factors_dilution"; grep "X11019"  $1*.out
 #echo "eEF1A"; grep "X10969"  $1*.out
 #echo "eEF1B"; grep "X11034"  $1*.out

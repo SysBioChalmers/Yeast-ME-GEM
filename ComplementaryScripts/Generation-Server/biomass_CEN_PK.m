@@ -97,7 +97,7 @@ lipid='';
     chitin_MW = 221.2;
     chitin= sprintf('%.15f chitin [cytoplasm]',1000/chitin_MW *chitin_ratio);
     
- % free amino acids
+% free amino acids
 free_aa_ratio =1-(proteinRatio(mu) + total_gram);
 total_gram = total_gram + free_aa_ratio;
 free_aa='';

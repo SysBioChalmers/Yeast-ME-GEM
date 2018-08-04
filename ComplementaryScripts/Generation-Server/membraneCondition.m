@@ -1,4 +1,4 @@
-function constrain = membraneCondition(model, mu,kdeg)
+function constrain = membraneConditionAngelica(model, mu,kdeg)
 
 [a b Proteins_MW]=xlsread('TableS1.xlsx','MW');
 [a b complex_list]=xlsread('TableS1.xlsx','Mito_Intermembrane_proteins');

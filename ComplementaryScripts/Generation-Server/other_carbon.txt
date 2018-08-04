@@ -1,0 +1,13 @@
+fructose	0.345117
+galactose	0.340430
+sucrose	0.442383
+raffinose	0.334570
+trehalose	0.400781
+maltose	0.401953
+acetate	0.144727
+glycerol	0.232031
+pyruvate	0.229102
+oleate	0.216797
+lactate	0.261914
+glucose	0.444727
+

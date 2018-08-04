@@ -1,0 +1,17 @@
+
+Log started (V12.1.1) Mon Oct 23 15:55:42 2017
+
+
+Log started (V12.1.1) Mon Oct 23 15:56:07 2017
+
+No problem exists.
+Warning, line 3: Objective ended unexpectedly.
+CPLEX Error  1618: Line 16267: Exponent '-219570.252501603274141e' not ended with number.
+No file read.
+New value for advanced start indicator: 1
+No problem exists.
+New value for feasibility tolerance: 1e-09
+
+Log started (V12.1.1) Mon Oct 23 19:05:19 2017
+
+No problem exists.

@@ -1,0 +1,39 @@
+#!/bin/bash
+for i in {1..40}
+do
+# open file for writing
+exec 3<> task"$i"
+
+echo $i
+echo "#!/bin/sh" >&3
+echo "#embedded options to qsub - start with #PBS" >&3
+echo "# -- our name ---" >&3
+echo "#PBS -N MySharedMatlab" >&3
+echo "# -- choose queue --" >&3
+echo "#PBS -q hpc" >&3
+echo "# -- Notify me by email when execution begins (b) and ends (e) --" >&3
+echo "#PBS -m be" >&3
+echo "# -- email address --" >&3
+echo "# please uncomment the following line and put in your e-mail address," >&3
+echo "# if you want to receive e-mail notifications on a non-default address" >&3
+echo "#PBS -M ibels@biosustain.dtu.dk" >&3
+echo "# -- estimated wall clock time (execution time): hh:mm:ss --" >&3
+echo "#PBS -l walltime=10:00:00" >&3
+echo "# -- parallel environment requests --" >&3
+echo "#PBS -l nodes=1:ppn=1" >&3
+echo "# -- end of PBS options --" >&3
+
+echo "# -- change to working directory" >&3
+echo "cd /zhome/88/9/107870/Yeast-ME-GEM/ComplementaryScripts/Generation-Server" >&3
+
+echo "# -- commands you want to execute --" >&3
+echo "#	" >&3
+
+echo "matlab -nodisplay -r 'OtherCarbone_GECKO_batch_SC_proteome_cost($i)' -logfile OtherCarbone_GECKO_batch_SC_proteome_cost$i" >&3
+
+  # Close fd 3
+exec 3>&-
+
+done
+
+ls task*  | while read file ; do qsub $file ; done
