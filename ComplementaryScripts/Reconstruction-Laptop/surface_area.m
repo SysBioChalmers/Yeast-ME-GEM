@@ -1,6 +1,7 @@
 function number = peptideRedius()
 %In this function we compute the number peptide in mitochondrial intermembrane
 % We used The redius of sphere containing the protein molecular weight
+% maybe we can combine the protein structure into the surface calculation
 cell_mito_ratio=.015;
 V=100; % as micro meter power 3 \mum^3
 V=V*cell_mito_ratio;
