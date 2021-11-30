@@ -1,4 +1,4 @@
-# Yeast-ME
+# pcYeast
 
 **We updated the metabolic model by including protein biosynthesis and degradation reactions and coupled metabolic fluxes with protein abundances.**
 
